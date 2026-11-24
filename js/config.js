@@ -10,7 +10,7 @@ const CONFIG = {
   API_URL:
     window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
       ? (window.location.port === "3000" ? window.location.origin : "http://localhost:3000")
-      : "https://spendsense-backend.onrender.com",
+      : "https://spendsense-backend-7kwv.onrender.com",
 
   // Default monthly budget in INR (₹)
   DEFAULT_MONTHLY_BUDGET: 20000,

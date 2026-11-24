@@ -2,8 +2,8 @@
 
 A sleek, dark-themed personal finance web app and receipt scanner.
 
-> **Live Application:** [spendsense-frontend.vercel.app](https://your-app.vercel.app)  
-> **Backend API:** [spendsense-backend.onrender.com](https://your-api.onrender.com)
+> **Live Application:** [spendsense-frontend-zeta.vercel.app](https://spendsense-frontend-zeta.vercel.app)  
+> **Backend API:** [spendsense-backend-7kwv.onrender.com](https://spendsense-backend-7kwv.onrender.com)
 
 ---
 
