@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Scanner — SpendSense</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Core Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- ════════════════ PINNED SIDEBAR ════════════════ -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="bi bi-wallet2"></i>
+        </div>
+        <span class="brand-title">SpendSense</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-label">Workspace</li>
+        <li class="menu-item">
+          <a href="dashboard.html">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="scan.html" class="active">
+            <i class="bi bi-camera-fill"></i>
+            <span>Scan Receipt</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="transactions.html">
+            <i class="bi bi-receipt"></i>
+            <span>Transactions</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="analytics.html">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+
+        <li class="menu-label" style="margin-top: 14px;">Preferences</li>
+        <li class="menu-item">
+          <a href="settings.html">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User footer -->
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar-circle" id="sidebarAvatar">
+            AV
+          </div>
+          <div class="user-meta">
+            <span class="user-name" id="sidebarUserName">Account</span>
+            <span class="user-status">Connected</span>
+          </div>
+        </div>
+        <button type="button" class="btn-icon-logout" id="sidebarLogoutBtn" title="Sign Out">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ════════════════ MAIN SCANNER WORKSPACE ════════════════ -->
+    <main class="app-main">
+      <!-- Top Header -->
+      <div class="top-header">
+        <div class="header-left">
+          <h1>Receipt Scanner</h1>
+          <p>Capture or upload your receipt slip. Line items, taxes, and dates are extracted and categorized instantly.</p>
+        </div>
+        <div class="header-right">
+          <span class="brand-badge" style="padding: 4px 8px; font-size: 11px;">
+            <i class="bi bi-shield-check me-1" style="color: var(--accent-emerald);"></i> Encrypted Sync
+          </span>
+        </div>
+      </div>
+
+      <!-- 1-Click Fast Test Receipts Bar (Demo Mode Only) -->
+      <div id="quickTestSamplesDiv" style="display: none; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 12px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.04em;">
+              <i class="bi bi-receipt me-1" style="color: var(--accent-emerald);"></i> Sample Receipts (Instant Preview)
+            </span>
+            <span class="category-pill" style="font-size: 10.5px;">No image needed</span>
+          </div>
+          <span style="font-size: 11.5px; color: var(--text-muted);">Try one to see line extraction in action</span>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button type="button" class="btn-secondary btn-sm sample-receipt-btn" data-sample="sample-cafe">
+            <span>☕ Blue Tokai Coffee</span>
+            <strong style="color: #fff; margin-left: 4px;">₹560</strong>
+          </button>
+          <button type="button" class="btn-secondary btn-sm sample-receipt-btn" data-sample="sample-groceries">
+            <span>🛒 Nature's Basket</span>
+            <strong style="color: #fff; margin-left: 4px;">₹2,840</strong>
+          </button>
+          <button type="button" class="btn-secondary btn-sm sample-receipt-btn" data-sample="sample-electronics">
+            <span>💻 Croma Electronics</span>
+            <strong style="color: #fff; margin-left: 4px;">₹6,499</strong>
+          </button>
+        </div>
+      </div>
+
+      <div class="split-grid" style="align-items: start;">
+        <!-- Left: Upload & Preview Column -->
+        <div class="card-panel">
+          <div class="card-title-row">
+            <h3><i class="bi bi-cloud-arrow-up text-muted"></i> Upload Receipt</h3>
+            <span style="font-size: 11px; color: var(--text-muted);">Max 15MB (JPG, PNG, WEBP)</span>
+          </div>
+
+          <!-- Drop Zone -->
+          <div class="drop-zone-sleek" id="dropZone">
+            <div class="drop-zone-icon">
+              <i class="bi bi-camera"></i>
+            </div>
+            <div style="font-size: 13.5px; font-weight: 600; color: #ffffff; margin-bottom: 4px;">
+              Click or drag & drop receipt here
+            </div>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+              Paper receipts, invoices, grocery tickets, or digital snapshots
+            </p>
+            <button type="button" class="btn-secondary btn-sm" id="uploadBtn">
+              <i class="bi bi-folder2-open"></i> Browse File
+            </button>
+            <input type="file" id="receiptInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+          </div>
+
+          <!-- Image Preview -->
+          <div id="previewContainer" style="margin-top: 16px; display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 11.5px; font-weight: 600; color: var(--text-muted);">RECEIPT PREVIEW</span>
+              <button type="button" class="action-btn" id="changeImageBtn" style="font-size: 11.5px;">
+                <i class="bi bi-arrow-repeat"></i> Change
+              </button>
+            </div>
+            <img id="receiptPreview" class="receipt-preview-box" alt="Receipt preview">
+          </div>
+
+          <!-- AI Pipeline Status Badges -->
+          <div id="pipelineStatus" style="margin-top: 18px; display: none;">
+            <div class="pipeline-step" id="stepCompress">
+              <i class="bi bi-file-earmark-image"></i>
+              <span>1. Client-side Image Optimization</span>
+            </div>
+            <div class="pipeline-step" id="stepOcr">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>2. Optical Line Item Extraction</span>
+            </div>
+            <div class="pipeline-step" id="stepExtract">
+              <i class="bi bi-check-circle"></i>
+              <span>3. Line-Item Structured Formatting</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Extracted Data Review & Confirmation Form -->
+        <div class="card-panel" id="receiptReviewCard" style="display: none;">
+          <div class="card-title-row">
+            <h3><i class="bi bi-check2-circle text-muted"></i> Review & Save Expense</h3>
+            <span class="category-pill" id="extractedCategoryBadge">Review Mode</span>
+          </div>
+
+          <form id="reviewForm" onsubmit="return false;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="reviewMerchant">Merchant / Store</label>
+                <input type="text" id="reviewMerchant" class="input-control" placeholder="e.g. Nature's Basket" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reviewCategory">Category</label>
+                <select id="reviewCategory" class="select-control">
+                  <option value="Food & Dining">Food & Dining</option>
+                  <option value="Groceries">Groceries</option>
+                  <option value="Shopping">Shopping</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Entertainment">Entertainment</option>
+                  <option value="Healthcare">Healthcare</option>
+                  <option value="Education">Education</option>
+                  <option value="Travel">Travel</option>
+                  <option value="Subscriptions">Subscriptions</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="reviewDate">Purchase Date</label>
+                <input type="date" id="reviewDate" class="input-control" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reviewAmount">Total Amount (₹)</label>
+                <input type="number" step="0.01" id="reviewAmount" class="input-control" placeholder="0.00" required>
+              </div>
+            </div>
+
+            <!-- Itemized breakdown section -->
+            <div style="margin: 16px 0 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <label class="form-label" style="margin-bottom: 0;">Extracted Line Items</label>
+                <button type="button" class="action-btn" id="addItemBtn" style="font-size: 11px;">
+                  <i class="bi bi-plus"></i> Add Item
+                </button>
+              </div>
+
+              <div id="receiptItemsList" style="display: flex; flex-direction: column; gap: 6px;">
+                <!-- Dynamically populated item rows -->
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+              <button type="button" class="btn-primary" id="saveExpense" style="flex: 1; justify-content: center;">
+                <i class="bi bi-check-lg"></i> Save Expense
+              </button>
+              <button type="button" class="btn-secondary" id="cancelScanBtn">
+                Reset
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Placeholder card when nothing scanned yet -->
+        <div class="card-panel" id="scannerEmptyPlaceholder" style="text-align: center; padding: 44px 24px;">
+          <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #94a3b8; font-size: 20px;">
+            <i class="bi bi-receipt-cutoff"></i>
+          </div>
+          <h3 style="font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">
+            Receipt Preview & Itemization
+          </h3>
+          <p style="font-size: 12.5px; color: var(--text-secondary); max-width: 340px; margin: 0 auto 18px; line-height: 1.55;">
+            Drop or browse a receipt slip on the left. Merchant details, itemized prices, and dates will populate here for review before saving.
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 8px; max-width: 290px; margin: 0 auto; text-align: left; font-size: 11.5px; color: var(--text-muted); padding: 12px 14px; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="bi bi-check-circle" style="color: var(--accent-emerald);"></i>
+              <span>Automatic merchant & date extraction</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="bi bi-check-circle" style="color: var(--accent-emerald);"></i>
+              <span>Item-by-item price breakdown</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <i class="bi bi-check-circle" style="color: var(--accent-emerald);"></i>
+              <span>Instant category & monthly budget sync</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Shelf -->
+  <div class="toast-shelf" id="toastContainer"></div>
+
+  <!-- Supabase JS Client v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Application Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/receipt.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 1. Check Auth or Demo Mode
+      const user = await Auth.getOrAuthenticateUser();
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      // Sync user profile in sidebar
+      Auth.syncSidebarUser(user);
+
+      // Only show quick test samples div in Demo Mode (hidden for logged in users)
+      const isDemo = window.DemoManager && DemoManager.isDemoMode();
+      const samplesDiv = document.getElementById("quickTestSamplesDiv");
+      if (samplesDiv) {
+        samplesDiv.style.display = isDemo ? "block" : "none";
+      }
+
+      // Bind logout button with sleek in-app modal
+      document.getElementById("sidebarLogoutBtn")?.addEventListener("click", () => Auth.confirmAndSignOut());
+
+      // Initialize scanner module
+      ReceiptScanner.init();
+
+      // Bind Sample Receipt Quick Buttons
+      document.querySelectorAll(".sample-receipt-btn").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const sampleId = btn.dataset.sample;
+          await ReceiptScanner.triggerSampleScan(sampleId);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

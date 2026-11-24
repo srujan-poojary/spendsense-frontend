@@ -1,0 +1,354 @@
+/* Page Animation */
+
+.page{
+
+    animation:fadeIn .35s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Cards */
+
+.card{
+
+    transition:
+
+    transform .35s ease,
+
+    box-shadow .35s ease;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* Buttons */
+
+.primary-btn,
+.secondary-btn,
+.icon-btn{
+
+    transition:all .25s ease;
+
+}
+
+.primary-btn:hover,
+.secondary-btn:hover,
+.icon-btn:hover{
+
+    transform:translateY(-2px) scale(1.03);
+
+}
+
+.primary-btn:active,
+.secondary-btn:active{
+
+    transform:scale(.96);
+
+}
+
+/* Sidebar */
+
+.nav-link{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.nav-link::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:4px;
+
+    height:100%;
+
+    background:var(--primary);
+
+    transform:scaleY(0);
+
+    transition:.3s;
+
+}
+
+.nav-link.active::before{
+
+    transform:scaleY(1);
+
+}
+
+/* Upload */
+
+.drop-zone{
+
+    transition:all .35s ease;
+
+}
+
+.drop-zone:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.drop-zone.dragover{
+
+    animation:pulse 1s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.02);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* Loader */
+
+.spinner-border{
+
+    animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* AI Card */
+
+.ai-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.ai-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.08),
+
+        transparent
+
+    );
+
+    transform:translateX(-120%);
+
+}
+
+.ai-card:hover::after{
+
+    animation:shine 1.3s ease;
+
+}
+
+@keyframes shine{
+
+    to{
+
+        transform:translateX(120%);
+
+    }
+
+}
+
+/* Hero Score */
+
+.hero-score{
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-8px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Charts */
+
+canvas{
+
+    animation:chartFade .8s ease;
+
+}
+
+@keyframes chartFade{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* Table */
+
+tbody tr{
+
+    transition:.25s;
+
+}
+
+tbody tr:hover{
+
+    transform:scale(1.01);
+
+}
+
+/* Toast */
+
+.toast{
+
+    animation:toastIn .4s ease;
+
+}
+
+@keyframes toastIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(80px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+/* Modal */
+
+.modal.show .modal-dialog{
+
+    animation:modalPop .3s ease;
+
+}
+
+@keyframes modalPop{
+
+    from{
+
+        transform:scale(.9);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpendSense — Smart Personal Finance & Expense Tracker</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Core Unified Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ════════════════ TOP NAVIGATION BAR ════════════════ -->
+  <header class="landing-navbar">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div class="brand-icon">
+        <i class="bi bi-wallet2"></i>
+      </div>
+      <span class="brand-title">SpendSense</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button type="button" class="btn-secondary btn-sm" id="navDemoBtn"
+        style="color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.3);">
+        <i class="bi bi-play-circle-fill me-1"></i> Live Demo
+      </button>
+      <button type="button" class="btn-primary btn-sm" id="navSignInBtn">
+        Sign In
+      </button>
+    </div>
+  </header>
+
+  <!-- ════════════════ HERO SECTION ════════════════ -->
+  <main>
+    <section class="landing-hero">
+      <div class="hero-pill-badge">
+        <span class="pulse-dot"></span>
+        <span>Instant Receipt Scanner • Real-Time Budgeting</span>
+      </div>
+
+      <h1>Effortless expense tracking from your receipts.</h1>
+
+      <p class="hero-sub">
+        Drop any paper receipt, invoice, or bill. SpendSense extracts itemized lines, categorizes expenses,
+        tracks your monthly budget, and keeps your finances organized.
+      </p>
+
+      <div class="hero-cta-group">
+        <!-- 1-Click Instant Demo Button -->
+        <button type="button" class="btn-primary" id="heroDemoBtn"
+          style="padding: 10px 22px; font-size: 13.5px; background: #ffffff; color: #09090b;">
+          <i class="bi bi-play-circle-fill" style="color: #10b981;"></i> Explore Live Demo
+        </button>
+        <button type="button" class="btn-secondary" id="heroGetStartedBtn"
+          style="padding: 10px 20px; font-size: 13.5px;">
+          <i class="bi bi-stars"></i> Create Account
+        </button>
+        <button type="button" class="btn-secondary" id="heroGoogleBtn" style="padding: 10px 18px; font-size: 13.5px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" style="margin-right: 4px;">
+            <path fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+            <path fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+          </svg>
+          Google Login
+        </button>
+      </div>
+
+      <p style="font-size: 11.5px; color: var(--text-muted); margin-top: 14px;">
+        ⚡ Instant access with preloaded sample expenses. No sign-up required.
+      </p>
+    </section>
+
+    <!-- ════════════════ LIVE PREVIEW MOCKUP ════════════════ -->
+    <section class="preview-container">
+      <div class="preview-card">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></div>
+            <span
+              style="margin-left: 10px; font-size: 11.5px; color: var(--text-muted); font-family: monospace;">spendsense.app/dashboard</span>
+          </div>
+          <span style="font-size: 11.5px; color: var(--accent-emerald); font-weight: 600;">● Live Preview
+            Telemetry</span>
+        </div>
+
+        <!-- Mini Stats in preview -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px;">
+          <div
+            style="background: var(--bg-surface-elevated); padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Total Spending</div>
+            <div style="font-size: 20px; font-weight: 700; color: #fff; margin-top: 4px;">₹31,457</div>
+          </div>
+          <div
+            style="background: var(--bg-surface-elevated); padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">This Month</div>
+            <div style="font-size: 20px; font-weight: 700; color: #fff; margin-top: 4px;">₹16,748</div>
+          </div>
+          <div
+            style="background: var(--bg-surface-elevated); padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Budget Left</div>
+            <div style="font-size: 20px; font-weight: 700; color: var(--accent-emerald); margin-top: 4px;">₹18,252</div>
+          </div>
+          <div
+            style="background: var(--bg-surface-elevated); padding: 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Receipts Scanned</div>
+            <div style="font-size: 20px; font-weight: 700; color: #fff; margin-top: 4px;">14</div>
+          </div>
+        </div>
+
+        <!-- Mini Sample Rows -->
+        <div
+          style="background: var(--bg-surface-elevated); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+          <div
+            style="padding: 10px 16px; font-size: 11px; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.015); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;">
+            <span>MERCHANT</span>
+            <span>CATEGORY</span>
+            <span>DATE</span>
+            <span style="text-align: right;">AMOUNT</span>
+          </div>
+          <div
+            style="padding: 12px 16px; font-size: 12.5px; border-bottom: 1px solid var(--border-subtle); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; align-items: center;">
+            <span style="font-weight: 600; color: #fff;"><i class="bi bi-cart me-2 text-muted"></i>Whole Foods
+              Market</span>
+            <span><span class="category-pill">Groceries</span></span>
+            <span style="color: var(--text-muted);">Today</span>
+            <span style="text-align: right; font-weight: 700; color: #fff;">₹3,420.00</span>
+          </div>
+          <div
+            style="padding: 12px 16px; font-size: 12.5px; border-bottom: 1px solid var(--border-subtle); display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; align-items: center;">
+            <span style="font-weight: 600; color: #fff;"><i class="bi bi-cup-hot me-2 text-muted"></i>Blue Tokai
+              Coffee</span>
+            <span><span class="category-pill">Food & Dining</span></span>
+            <span style="color: var(--text-muted);">Yesterday</span>
+            <span style="text-align: right; font-weight: 700; color: #fff;">₹560.00</span>
+          </div>
+          <div
+            style="padding: 12px 16px; font-size: 12.5px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; align-items: center;">
+            <span style="font-weight: 600; color: #fff;"><i class="bi bi-bag me-2 text-muted"></i>Apple Store</span>
+            <span><span class="category-pill">Shopping</span></span>
+            <span style="color: var(--text-muted);">4 days ago</span>
+            <span style="text-align: right; font-weight: 700; color: #fff;">₹8,900.00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════ FEATURES GRID ════════════════ -->
+    <section class="features-grid">
+      <div class="feature-box">
+        <div class="feature-icon-circle">
+          <i class="bi bi-camera-fill"></i>
+        </div>
+        <h4>Instant Receipt Scanner</h4>
+        <p>Drop receipt photos, thermal paper slips, or digital PDFs. Line items, taxes, and dates are extracted with high fidelity.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon-circle">
+          <i class="bi bi-diagram-3-fill"></i>
+        </div>
+        <h4>Smart Categorization</h4>
+        <p>Zero manual bookkeeping. Every expense is automatically mapped into standard categories to keep your monthly budget strictly on track.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon-circle">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h4>Private & Secure</h4>
+        <p>Protected by PostgreSQL Row-Level Security. Your financial records, receipts, and personal transaction data belong strictly to you.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ════════════════ AUTHENTICATION MODAL ════════════════ -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-card">
+      <button type="button" class="auth-close-btn" id="authCloseBtn">
+        <i class="bi bi-x-lg"></i>
+      </button>
+
+      <div class="auth-header">
+        <div class="auth-logo-badge">
+          <i class="bi bi-wallet2"></i>
+        </div>
+        <h2 id="authModalTitle">Sign in to SpendSense</h2>
+        <p id="authModalSubtitle">Manage your finances with intelligent AI receipt scanning</p>
+      </div>
+
+      <!-- 1-Click Instant Demo Button in Modal -->
+      <button type="button" class="btn-secondary" id="modalDemoBtn"
+        style="width: 100%; justify-content: center; margin-bottom: 14px; background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3); color: #fff;">
+        <i class="bi bi-play-circle-fill me-2" style="color: var(--accent-emerald);"></i> Explore Live Demo (Instant •
+        No Login)
+      </button>
+
+      <!-- Error banner -->
+      <div class="auth-error-banner" id="authErrorBanner"></div>
+
+      <!-- Google OAuth Button -->
+      <button type="button" class="btn-google-oauth" id="googleLoginBtn">
+        <svg viewBox="0 0 24 24">
+          <path fill="#4285F4"
+            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+          <path fill="#34A853"
+            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+          <path fill="#FBBC05"
+            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+          <path fill="#EA4335"
+            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="auth-divider">
+        <span>OR CONTINUE WITH EMAIL</span>
+      </div>
+
+      <!-- Email / Password Form -->
+      <form id="authForm" data-mode="signin">
+        <div class="form-group">
+          <label class="form-label" for="authEmail">Email Address</label>
+          <input type="email" id="authEmail" class="input-control" placeholder="you@company.com" required
+            autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="authPassword">Password</label>
+          <input type="password" id="authPassword" class="input-control" placeholder="••••••••" required
+            autocomplete="current-password" minlength="6">
+        </div>
+
+        <button type="submit" class="btn-primary" id="authSubmitBtn"
+          style="width: 100%; justify-content: center; padding: 9px; margin-top: 6px;">
+          Sign In
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <span id="authTogglePrompt">Don't have an account?</span>
+        <a id="authToggleLink">Sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Shelf -->
+  <div class="toast-shelf" id="toastContainer"></div>
+
+  <!-- Supabase JS Client v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Application Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Check if user is already authenticated (or in demo mode) -> redirect to dashboard.html
+      const user = await Auth.getOrAuthenticateUser();
+      if (user) {
+        window.location.href = "dashboard.html";
+        return;
+      }
+
+      // Hook up modal triggers
+      const overlay = document.getElementById("authOverlay");
+      const openModal = (mode = "signin") => {
+        Auth.toggleAuthMode(mode);
+        overlay.classList.add("active");
+      };
+      const closeModal = () => {
+        overlay.classList.remove("active");
+        Auth.clearError();
+      };
+
+      document.getElementById("navSignInBtn")?.addEventListener("click", () => openModal("signin"));
+      document.getElementById("heroGetStartedBtn")?.addEventListener("click", () => openModal("signup"));
+      document.getElementById("heroGoogleBtn")?.addEventListener("click", () => Auth.signInWithGoogle());
+      document.getElementById("authCloseBtn")?.addEventListener("click", closeModal);
+
+      // Instant Demo Triggers
+      const startDemo = () => DemoManager.enterDemoMode();
+      document.getElementById("navDemoBtn")?.addEventListener("click", startDemo);
+      document.getElementById("heroDemoBtn")?.addEventListener("click", startDemo);
+      document.getElementById("modalDemoBtn")?.addEventListener("click", startDemo);
+
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeModal();
+      });
+
+      // Bind Auth listeners
+      Auth.init();
+    });
+  </script>
+</body>
+
+</html>

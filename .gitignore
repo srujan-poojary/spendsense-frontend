@@ -1,0 +1,15 @@
+# OS & Editor Files
+.DS_Store
+.DS_Store?
+._*
+.vscode/
+.idea/
+
+# Node & Build (if using build tools)
+node_modules/
+dist/
+*.log
+
+# Environment Files (if added)
+.env
+.env.*

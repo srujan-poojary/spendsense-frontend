@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — SpendSense</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Core Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="app-layout">
+    <!-- ════════════════ PINNED SIDEBAR ════════════════ -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="bi bi-wallet2"></i>
+        </div>
+        <span class="brand-title">SpendSense</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-label">Workspace</li>
+        <li class="menu-item">
+          <a href="dashboard.html">
+            <i class="bi bi-grid-1x2"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="scan.html">
+            <i class="bi bi-camera"></i>
+            <span>Scan Receipt</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="transactions.html">
+            <i class="bi bi-receipt"></i>
+            <span>Transactions</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="analytics.html">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+
+        <li class="menu-label" style="margin-top: 14px;">Preferences</li>
+        <li class="menu-item">
+          <a href="settings.html" class="active">
+            <i class="bi bi-gear-fill"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User footer -->
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar-circle" id="sidebarAvatar">
+            AV
+          </div>
+          <div class="user-meta">
+            <span class="user-name" id="sidebarUserName">Account</span>
+            <span class="user-status">Connected</span>
+          </div>
+        </div>
+        <button type="button" class="btn-icon-logout" id="sidebarLogoutBtn" title="Sign Out">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ════════════════ MAIN SETTINGS VIEW ════════════════ -->
+    <main class="app-main">
+      <!-- Top Header -->
+      <div class="top-header">
+        <div class="header-left">
+          <h1>Account Settings</h1>
+          <p>Manage your account profile and monthly budget limits.</p>
+        </div>
+        <div class="header-right">
+          <a href="scan.html" class="btn-primary">
+            <i class="bi bi-camera"></i> Scan Receipt
+          </a>
+        </div>
+      </div>
+
+      <!-- Demo Mode Notice Banner (visible only in Demo Mode) -->
+      <div id="demoModeNoticeBanner"
+        style="display: none; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <i class="bi bi-info-circle-fill" style="color: var(--accent-amber); font-size: 16px;"></i>
+            <div>
+              <span style="font-weight: 700; color: #fff; font-size: 13px;">Active Demo Sandbox</span>
+              <p style="font-size: 12px; color: var(--text-secondary); margin: 2px 0 0;">
+                All receipt scans, transactions, and preferences are executing instantly in your browser's local cache.
+              </p>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary btn-sm" id="resetDemoDataBtn">
+            <i class="bi bi-arrow-counterclockwise"></i> Reset Sample Data
+          </button>
+        </div>
+      </div>
+
+      <div class="split-grid" style="align-items: start;">
+        <!-- Left: Profile -->
+        <div class="card-panel">
+          <div class="card-title-row" style="margin-bottom: 18px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div class="brand-icon" style="width: 22px; height: 22px; font-size: 11px; border-radius: 5px;">
+                <i class="bi bi-wallet2"></i>
+              </div>
+              <h3 style="margin: 0; font-size: 15px; font-weight: 600;">Personal Profile</h3>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--border-subtle);">
+            <div class="user-avatar-circle" id="settingsAvatar"
+              style="width: 54px; height: 54px; font-size: 19px; background: linear-gradient(135deg, #27272a 0%, #18181b 100%); color: #fff; font-weight: 700; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+              AV
+            </div>
+            <div>
+              <div style="font-size: 16.5px; font-weight: 700; color: #ffffff; letter-spacing: -0.2px;" id="settingsDisplayName">User</div>
+              <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 2px;" id="settingsEmail">user@example.com</div>
+              <div style="margin-top: 6px;">
+                <span id="settingsProviderBadge" style="display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--text-secondary);">
+                  <i class="bi bi-google"></i> Google
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <form id="profileForm" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 14px;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profileNameInput" style="font-size: 12px; text-transform: none; color: var(--text-secondary); font-weight: 500;">Display Name</label>
+              <input type="text" id="profileNameInput" class="input-control" placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profileEmailInput" style="font-size: 12px; text-transform: none; color: var(--text-secondary); font-weight: 500;">Email Address</label>
+              <input type="email" id="profileEmailInput" class="input-control" readonly style="background: rgba(255, 255, 255, 0.02); color: var(--text-secondary); cursor: not-allowed;">
+              <small style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 4px;">Primary login email.</small>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border-subtle); font-size: 12.5px;">
+              <span style="color: var(--text-muted);">Member Since</span>
+              <span style="color: #fff; font-weight: 500;" id="settingsJoinedDate">November 2026</span>
+            </div>
+
+            <div style="margin-top: 6px;">
+              <button type="button" class="btn-secondary btn-sm" id="saveProfileBtn">
+                <i class="bi bi-check2"></i> Save Profile
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Financial Configuration -->
+        <div class="card-panel">
+          <div class="card-title-row">
+            <h3><i class="bi bi-sliders text-muted"></i> Financial Preferences</h3>
+          </div>
+
+          <form id="settingsForm" onsubmit="return false;">
+            <div class="form-group">
+              <label class="form-label" for="budgetInput">Monthly Budget Limit (₹)</label>
+              <input type="number" id="budgetInput" class="input-control" placeholder="25000" min="500" step="500">
+              <small style="font-size: 11px; color: var(--text-muted); display: block; margin-top: 4px;">
+                SpendSense calculates your real-time budget burn rate and velocity against this threshold.
+              </small>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="currencySelect">Default Currency</label>
+              <select id="currencySelect" class="select-control">
+                <option value="INR">Indian Rupee (₹ INR)</option>
+                <option value="USD">US Dollar ($ USD)</option>
+                <option value="EUR">Euro (€ EUR)</option>
+                <option value="GBP">British Pound (£ GBP)</option>
+              </select>
+            </div>
+
+            <div
+              style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+              <button type="button" class="btn-primary" id="saveSettingsBtn">
+                <i class="bi bi-check2"></i> Save Preferences
+              </button>
+
+              <button type="button" class="btn-danger btn-sm" id="dangerLogoutBtn">
+                <i class="bi bi-box-arrow-right"></i> Sign Out
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Toast Shelf -->
+  <div class="toast-shelf" id="toastContainer"></div>
+
+  <!-- Supabase JS Client v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Application Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 1. Guard route: check Auth or Demo Mode
+      const user = await Auth.getOrAuthenticateUser();
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      const isDemo = window.DemoManager && DemoManager.isDemoMode();
+
+      // Show demo banner if in demo mode
+      if (isDemo) {
+        document.getElementById("demoModeNoticeBanner").style.display = "block";
+        document.getElementById("resetDemoDataBtn")?.addEventListener("click", () => {
+          DemoManager.resetDemoData();
+          UI.toast("Demo sample transactions restored!", "success");
+        });
+      }
+
+      // Sync user profile in sidebar & settings page
+      Auth.syncSidebarUser(user);
+
+      // Populate Settings details with persistent custom name check
+      const meta = user.user_metadata || {};
+      let capName = "User";
+      if (isDemo) {
+        const demoSavedName = localStorage.getItem("spendsense_demo_name");
+        capName = demoSavedName || "Alex Vance";
+      } else {
+        const userScopedKey = user?.id ? `spendsense_name_${user.id}` : "spendsense_user_name";
+        const savedCustomName = localStorage.getItem(userScopedKey) || localStorage.getItem("spendsense_user_name");
+        const name = savedCustomName || meta.full_name || meta.name || user.email?.split("@")[0] || "User";
+        capName = name.charAt(0).toUpperCase() + name.slice(1);
+      }
+      const email = isDemo ? "alex.vance@spendsense.app" : (user.email || "");
+
+      document.getElementById("settingsDisplayName").textContent = capName;
+      document.getElementById("settingsEmail").textContent = email;
+
+      const nameInput = document.getElementById("profileNameInput");
+      if (nameInput) nameInput.value = capName;
+
+      const emailInput = document.getElementById("profileEmailInput");
+      if (emailInput) emailInput.value = email;
+
+      const joinedEl = document.getElementById("settingsJoinedDate");
+      if (joinedEl) {
+        if (user.created_at) {
+          const d = new Date(user.created_at);
+          joinedEl.textContent = d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+        } else {
+          joinedEl.textContent = "Recent";
+        }
+      }
+
+      const providerBadge = document.getElementById("settingsProviderBadge");
+      if (providerBadge) {
+        const rawProv = (user.app_metadata?.provider || "").toLowerCase();
+        if (isDemo) {
+          providerBadge.textContent = "Demo Account";
+        } else if (rawProv.includes("google")) {
+          providerBadge.innerHTML = `<span style="display:inline-flex;align-items:center;gap:5px;"><svg viewBox="0 0 24 24" width="13" height="13"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg> Google</span>`;
+        } else {
+          providerBadge.textContent = "Email & Password";
+        }
+      }
+
+      const updateAvatarInitials = (displayName) => {
+        const avatarEl = document.getElementById("settingsAvatar");
+        if (!avatarEl) return;
+        if (!isDemo && (meta.avatar_url || meta.picture)) {
+          avatarEl.innerHTML = `<img src="${meta.avatar_url || meta.picture}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+        } else {
+          avatarEl.textContent = isDemo ? "AV" : (displayName.slice(0, 2) || "SS").toUpperCase();
+        }
+      };
+      updateAvatarInitials(capName);
+
+      // ════════════════ CHANGE-DETECTION BUTTON PROTOCOLS ════════════════
+      // 1. Profile Name Change Detection
+      let currentSavedName = capName;
+      const saveProfileBtn = document.getElementById("saveProfileBtn");
+
+      const updateProfileBtnState = () => {
+        if (!saveProfileBtn) return;
+        const val = nameInput ? nameInput.value.trim() : "";
+        const hasChanged = val.length > 0 && val !== currentSavedName;
+        saveProfileBtn.disabled = !hasChanged;
+        saveProfileBtn.style.opacity = hasChanged ? "1" : "0.4";
+        saveProfileBtn.style.cursor = hasChanged ? "pointer" : "not-allowed";
+        saveProfileBtn.style.pointerEvents = hasChanged ? "auto" : "none";
+      };
+
+      // Set initial disabled state
+      updateProfileBtnState();
+      nameInput?.addEventListener("input", updateProfileBtnState);
+
+      saveProfileBtn?.addEventListener("click", async () => {
+        const nameVal = nameInput ? nameInput.value.trim() : "";
+        if (!nameVal || nameVal === currentSavedName) return;
+
+        // Persist to user-scoped and general localStorage
+        if (isDemo) {
+          localStorage.setItem("spendsense_demo_name", nameVal);
+        } else {
+          if (user?.id) {
+            localStorage.setItem(`spendsense_name_${user.id}`, nameVal);
+          }
+          localStorage.setItem("spendsense_user_name", nameVal);
+
+          // Update in Supabase Auth user_metadata if real user
+          if (window.supabaseClient) {
+            try {
+              await supabaseClient.auth.updateUser({
+                data: { full_name: nameVal, name: nameVal }
+              });
+            } catch (e) {
+              console.warn("Supabase user profile update warning:", e);
+            }
+          }
+        }
+
+        currentSavedName = nameVal;
+        document.getElementById("settingsDisplayName").textContent = nameVal;
+        updateAvatarInitials(nameVal);
+
+        // Sync with sidebar and hero greeting
+        Auth.syncSidebarUser(user);
+
+        // Disable button immediately after saving
+        updateProfileBtnState();
+
+        UI.toast("Profile updated successfully.", "success");
+      });
+
+      // 2. Financial Preferences Change Detection
+      const budgetInput = document.getElementById("budgetInput");
+      const currencySelect = document.getElementById("currencySelect");
+      const saveSettingsBtn = document.getElementById("saveSettingsBtn");
+
+      // Populate scoped budget & currency
+      const currentBudget = Dashboard.getMonthlyBudget(user?.id);
+      if (budgetInput) budgetInput.value = currentBudget;
+
+      const currentCurrency = localStorage.getItem("spendsense_currency") || "INR";
+      if (currencySelect) currencySelect.value = currentCurrency;
+
+      let currentSavedBudget = String(currentBudget);
+      let currentSavedCurrency = currentCurrency;
+
+      const updateSettingsBtnState = () => {
+        if (!saveSettingsBtn) return;
+        const bVal = budgetInput ? budgetInput.value.trim() : "";
+        const cVal = currencySelect ? currencySelect.value : "";
+        const hasChanged = (bVal !== currentSavedBudget || cVal !== currentSavedCurrency) && Number(bVal) > 0;
+        saveSettingsBtn.disabled = !hasChanged;
+        saveSettingsBtn.style.opacity = hasChanged ? "1" : "0.4";
+        saveSettingsBtn.style.cursor = hasChanged ? "pointer" : "not-allowed";
+        saveSettingsBtn.style.pointerEvents = hasChanged ? "auto" : "none";
+      };
+
+      // Set initial disabled state
+      updateSettingsBtnState();
+      budgetInput?.addEventListener("input", updateSettingsBtnState);
+      currencySelect?.addEventListener("change", updateSettingsBtnState);
+
+      saveSettingsBtn?.addEventListener("click", () => {
+        const newBudget = Number(budgetInput ? budgetInput.value : 0) || CONFIG.DEFAULT_MONTHLY_BUDGET;
+        const newCurrency = currencySelect ? currencySelect.value : "INR";
+
+        // Scoped budget saving (never overwrites demo from real user or vice versa)
+        Dashboard.setMonthlyBudget(newBudget, user?.id);
+        localStorage.setItem("spendsense_currency", newCurrency);
+
+        currentSavedBudget = String(newBudget);
+        currentSavedCurrency = newCurrency;
+
+        // Disable button immediately after saving
+        updateSettingsBtnState();
+
+        UI.toast("Preferences saved successfully.", "success");
+      });
+
+      // Bind logout buttons with sleek in-app modal
+      const handleLogout = () => Auth.confirmAndSignOut();
+      document.getElementById("sidebarLogoutBtn")?.addEventListener("click", handleLogout);
+      document.getElementById("dangerLogoutBtn")?.addEventListener("click", handleLogout);
+    });
+  </script>
+</body>
+
+</html>

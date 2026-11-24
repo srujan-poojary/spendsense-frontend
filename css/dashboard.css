@@ -1,0 +1,125 @@
+/* Dashboard Hero */
+
+.hero-card{
+
+    min-height:280px;
+
+}
+
+.hero-left{
+
+    flex:1;
+
+}
+
+.hero-right{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+/* KPI Cards */
+
+.stats-grid{
+
+    margin-bottom:32px;
+
+}
+
+.stat-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.stat-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+
+}
+
+.stat-card h2{
+
+    font-weight:800;
+
+}
+
+.stat-card small{
+
+    font-size:.85rem;
+
+}
+
+/* AI Card */
+
+.ai-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    min-height:250px;
+
+}
+
+.ai-card p{
+
+    color:var(--text-secondary);
+
+    line-height:1.8;
+
+}
+
+/* Recent Transactions */
+
+#recentTransactions tr{
+
+    transition:var(--transition);
+
+}
+
+#recentTransactions tr:hover{
+
+    background:rgba(255,255,255,.03);
+
+}
+
+/* Dashboard Cards */
+
+.dashboard-grid .card{
+
+    min-height:380px;
+
+}
+
+/* Chart */
+
+canvas{
+
+    margin-top:20px;
+
+}

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — SpendSense</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Core Design System -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    <!-- ════════════════ PINNED SIDEBAR ════════════════ -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">
+          <i class="bi bi-wallet2"></i>
+        </div>
+        <span class="brand-title">SpendSense</span>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li class="menu-label">Workspace</li>
+        <li class="menu-item">
+          <a href="dashboard.html" class="active">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Overview</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="scan.html">
+            <i class="bi bi-camera"></i>
+            <span>Scan Receipt</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="transactions.html">
+            <i class="bi bi-receipt"></i>
+            <span>Transactions</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="analytics.html">
+            <i class="bi bi-bar-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+
+        <li class="menu-label" style="margin-top: 14px;">Preferences</li>
+        <li class="menu-item">
+          <a href="settings.html">
+            <i class="bi bi-gear"></i>
+            <span>Settings</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User footer -->
+      <div class="sidebar-footer">
+        <div class="user-snippet">
+          <div class="user-avatar-circle" id="sidebarAvatar">
+            AV
+          </div>
+          <div class="user-meta">
+            <span class="user-name" id="sidebarUserName">Account</span>
+            <span class="user-status">Connected</span>
+          </div>
+        </div>
+        <button type="button" class="btn-icon-logout" id="sidebarLogoutBtn" title="Sign Out">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ════════════════ MAIN CONTENT ════════════════ -->
+    <main class="app-main">
+      <!-- Top Header -->
+      <div class="top-header">
+        <div class="header-left">
+          <h1 id="heroGreetingTitle">Good day</h1>
+          <p>Overview of your spending, monthly budget, and recent expenses.</p>
+        </div>
+        <div class="header-right">
+          <a href="scan.html" class="btn-primary">
+            <i class="bi bi-camera"></i> Scan Receipt
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 KPI Metrics Strip -->
+      <section class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Total Spent</span>
+            <i class="bi bi-wallet2"></i>
+          </div>
+          <div class="metric-value" id="totalSpent">₹0</div>
+          <div class="metric-footer">All-time recorded</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span id="monthlySpentTitle">This Month</span>
+            <i class="bi bi-calendar3"></i>
+          </div>
+          <div class="metric-value" id="monthlySpent">₹0</div>
+          <div class="metric-footer" id="monthlySpentSubtitle">Current billing period</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Budget Remaining</span>
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <div class="metric-value" id="budgetLeft" style="color: var(--accent-emerald);">₹20,000</div>
+          <div class="metric-footer" id="budgetUsageLabel">Safe spending zone</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>Receipts Tracked</span>
+            <i class="bi bi-receipt"></i>
+          </div>
+          <div class="metric-value" id="transactionCount">0</div>
+          <div class="metric-footer">Itemized records</div>
+        </div>
+      </section>
+
+      <!-- Split Grid: Budget Tracker & AI Intelligence -->
+      <section class="split-grid">
+        <!-- Enriched Monthly Budget & Pacing Card -->
+        <div class="card-panel">
+          <div class="card-title-row" style="margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h3><i class="bi bi-pie-chart text-muted"></i> Monthly Budget & Pacing</h3>
+            </div>
+            <span style="font-size: 11.5px; font-weight: 700; color: #fff; background: rgba(255, 255, 255, 0.06); padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border);" id="budgetUsagePercent">0% Used</span>
+          </div>
+
+          <!-- Progress Bar with Spent / Limit Sub-labels -->
+          <div class="progress-track" style="height: 8px; margin: 8px 0 6px;">
+            <div class="progress-fill" id="budgetProgressBar" style="width: 0%;"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
+            <span>Spent: <strong id="budgetBarSpent" style="color: #fff;">₹0</strong></span>
+            <span id="budgetBarCycleLabel" style="color: var(--text-muted); font-size: 11px;">Current cycle</span>
+            <span>Limit: <strong id="budgetBarLimit" style="color: #fff;">₹20,000</strong></span>
+          </div>
+
+          <!-- 3 Micro Pacing Tiles -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+            <div class="ai-insight-card" style="padding: 10px;">
+              <div class="ai-insight-card-header">
+                <span style="font-size: 10.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Active Spent</span>
+                <i class="bi bi-wallet2" style="color: #60a5fa; font-size: 12px;"></i>
+              </div>
+              <div style="font-size: 14px; font-weight: 700; color: #fff; margin-top: 2px;" id="tileSpentActive">₹0</div>
+              <div style="font-size: 10.5px; color: var(--text-muted);" id="tileSpentPercent">0% of budget</div>
+            </div>
+
+            <div class="ai-insight-card" style="padding: 10px;">
+              <div class="ai-insight-card-header">
+                <span style="font-size: 10.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Runway Left</span>
+                <i class="bi bi-shield-check" style="color: var(--accent-emerald); font-size: 12px;"></i>
+              </div>
+              <div style="font-size: 14px; font-weight: 700; color: var(--accent-emerald); margin-top: 2px;" id="tileBufferLeft">₹20,000</div>
+              <div style="font-size: 10.5px; color: var(--text-muted);" id="tileBufferStatus">Healthy buffer</div>
+            </div>
+
+            <div class="ai-insight-card" style="padding: 10px;">
+              <div class="ai-insight-card-header">
+                <span style="font-size: 10.5px; color: var(--text-muted); font-weight: 600; text-transform: uppercase;">Daily Burn Cap</span>
+                <i class="bi bi-speedometer2" style="color: #a78bfa; font-size: 12px;"></i>
+              </div>
+              <div style="font-size: 14px; font-weight: 700; color: #fff; margin-top: 2px;" id="tileDailyAllowance">₹667/day</div>
+              <div style="font-size: 10.5px; color: var(--text-muted);" id="tileDailyStatus">Safe pacing</div>
+            </div>
+          </div>
+
+          <!-- Pacing Narrative Box -->
+          <div class="budget-pacing-box" id="budgetPacingBox" style="padding: 10px 12px; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.18); border-radius: 8px; display: flex; align-items: flex-start; gap: 8px;">
+            <i class="bi bi-graph-up-arrow" id="budgetPacingIcon" style="color: var(--accent-emerald); font-size: 14px; margin-top: 1px;"></i>
+            <div style="font-size: 11.5px; color: #e2e8f0; line-height: 1.45;" id="budgetPacingNarrative">
+              Calculating budget pacing...
+            </div>
+          </div>
+        </div>
+
+        <!-- Intelligent Multi-Dimensional AI Spending Panel -->
+        <div class="card-panel ai-intelligence-panel">
+          <div class="card-title-row" style="margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <h3><i class="bi bi-stars" style="color: #60a5fa;"></i> Spending Insights</h3>
+            </div>
+            <button type="button" class="btn-ghost" id="refreshAiInsightsBtn" title="Refresh insights">
+              <i class="bi bi-arrow-clockwise"></i> Refresh
+            </button>
+          </div>
+
+          <!-- Dynamic Headline & Summary -->
+          <div class="ai-summary-header">
+            <h4 id="aiInsightHeadline" style="margin: 0 0 6px; font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -0.2px;">
+              Analyzing spending patterns...
+            </h4>
+            <p id="aiInsightSummary" style="margin: 0; font-size: 12px; color: var(--text-secondary); line-height: 1.55;">
+              Upload receipts to generate automated spending intelligence and category breakdowns.
+            </p>
+          </div>
+
+          <!-- Micro Intelligence Insight Cards -->
+          <div class="ai-cards-grid" id="aiCardsContainer" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 8px; margin-top: 12px;">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Actionable Tip Footer -->
+          <div class="ai-tip-box" id="aiTipBox" style="margin-top: 12px; padding: 10px 12px; background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 8px; display: flex; align-items: flex-start; gap: 8px;">
+            <i class="bi bi-lightbulb-fill" style="color: #60a5fa; font-size: 14px; margin-top: 1px;"></i>
+            <div style="font-size: 11.5px; color: #e2e8f0; line-height: 1.45;" id="aiActionableTip">
+              Scan receipts to receive tactical budgeting recommendations based on your itemized line items.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Grid: Spending Breakdown & Recent Transactions -->
+      <section class="split-grid">
+        <!-- Category Distribution Chart Card -->
+        <div class="card-panel">
+          <div class="card-title-row">
+            <h3><i class="bi bi-diagram-3 text-muted"></i> Category Allocation</h3>
+            <a href="analytics.html" class="card-action-link">Full Analytics <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div style="height: 240px; position: relative;">
+            <canvas id="overviewCategoryChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Recent Transactions Card -->
+        <div class="card-panel">
+          <div class="card-title-row">
+            <h3><i class="bi bi-clock-history text-muted"></i> Recent Transactions</h3>
+            <a href="transactions.html" class="card-action-link">View All <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="data-table-wrapper" style="border: none;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>MERCHANT</th>
+                  <th>CATEGORY</th>
+                  <th style="text-align: right;">AMOUNT</th>
+                </tr>
+              </thead>
+              <tbody id="recentTransactions">
+                <tr>
+                  <td colspan="3" style="text-align: center; padding: 36px 12px; color: var(--text-muted);">
+                    <i class="bi bi-receipt" style="font-size: 24px; display: block; margin-bottom: 8px; opacity: 0.4;"></i>
+                    No expenses recorded yet.<br>
+                    <a href="scan.html" class="btn-secondary btn-sm" style="margin-top: 10px;">
+                      <i class="bi bi-camera"></i> Scan First Receipt
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Toast Shelf -->
+  <div class="toast-shelf" id="toastContainer"></div>
+
+  <!-- Supabase JS Client v2 -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Application Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/dashboard.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // 1. Guard route: check Auth or Demo Mode
+      const user = await Auth.getOrAuthenticateUser();
+      if (!user) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      // Sync user profile in sidebar & header
+      Auth.syncSidebarUser(user);
+
+      // Bind logout button with sleek in-app modal
+      document.getElementById("sidebarLogoutBtn")?.addEventListener("click", () => Auth.confirmAndSignOut());
+
+      // Load dashboard telemetry & charts
+      await Dashboard.load();
+    });
+  </script>
+</body>
+</html>
